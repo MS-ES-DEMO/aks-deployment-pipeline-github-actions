@@ -65,11 +65,11 @@
 
     <!-- {{ with .Site.GetPage "/blog" }}
     {{ $pages = $pages | append . }}
-    {{ end }}
+    {{ end }} -->
 
     {{ with .Site.GetPage "/projects" }}
     {{ $pages = $pages | append . }}
-    {{ end }} -->
+    {{ end }}
 
     {{ range sort $pages "Params.weight" }}
     {{ if ne .Name "contact.md" }}
