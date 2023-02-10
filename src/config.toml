@@ -1,6 +1,7 @@
 baseURL                          = "/"  # Your domain name. Must end with "/"
 theme                            = "introduction"
 DefaultContentLanguage           = "en"                    # Default language for multilingual sites
+azureAppInsightsKey              = "2bae2626-bd84-4341-8ab1-3634e8abbd89"
 # disqusshortname                 = ""                       # https://gohugo.io/content-management/comments
 # googleAnalytics                 = ""                       # https://gohugo.io/templates/internal/#google-analytics
 
