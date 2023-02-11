@@ -9,7 +9,7 @@
     {{ partial "css/owlCarousel.html" . }}
 </head>
 
-<body>    
+<body>
     {{ with .Site.GetPage "/home" }}
     <section id="top" class="hero is-{{ .Site.Params.home.introHeight | default "fullheight" }}">
         <!-- Hero head section to play nice with Bulma -->
@@ -21,7 +21,7 @@
                 <!-- Title and tagline -->
                 <h1
                     class="bold-title {{ if or (.Site.Params.fadeIn | default true) .Site.Params.fadeInIndex }}fade-in one{{ end }}">
-                    {{ .Title | markdownify }} - UPDATED 10/02/2023
+                    {{ .Title | markdownify }}
                 </h1>
                 <div
                     class="subtitle is-3 {{ if or (.Site.Params.fadeIn | default true) .Site.Params.fadeInIndex }}fade-in two{{ end }}">
