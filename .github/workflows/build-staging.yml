@@ -14,7 +14,6 @@ env:
   tag: ${{ github.sha }}
 
 jobs:
-jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     build_push_image:
