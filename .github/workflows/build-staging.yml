@@ -4,7 +4,8 @@ on:
   pull_request:
     types:
       - closed
-    branches: [ staging ]    
+    branches:
+      - staging
 
 env:
   namespace: staging      
@@ -38,34 +39,34 @@ jobs:
           push: true
 
   deploy:
-  runs-on: ubuntu-20.04
-  needs: build_push_image
+    runs-on: ubuntu-20.04
+    needs: build_push_image
 
-  steps:
-    - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-    - name: Install Helm
-      uses: Azure/setup-helm@v1
-      with:
-        version: v3.3.1
+      - name: Install Helm
+        uses: Azure/setup-helm@v1
+        with:
+          version: v3.3.1
 
-    - name: Get AKS Credentials
-      uses: Azure/aks-set-context@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-        resource-group: ${{ env.resource-group }}
-        cluster-name: ${{ env.cluster-name }}
-        
-    - name: Run Helm Deploy
-      run: |
-        helm upgrade \
-          --install \
-          --create-namespace \
-          --atomic \
-          --wait \
-          --namespace ${{ env.namespace }} \
-          ${{ env.web-name }} \
-          ./kubernetes/${{ env.web-name }} \
-          --set image.repository=${{ secrets.ACR_NAME }} \
-          --set dns.name=${{ secrets.DNS_NAME }} \
-          --set image.tag=${{ env.tag }}
+      - name: Get AKS Credentials
+        uses: Azure/aks-set-context@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          resource-group: ${{ env.resource-group }}
+          cluster-name: ${{ env.cluster-name }}
+          
+      - name: Run Helm Deploy
+        run: |
+          helm upgrade \
+            --install \
+            --create-namespace \
+            --atomic \
+            --wait \
+            --namespace ${{ env.namespace }} \
+            ${{ env.web-name }} \
+            ./kubernetes/${{ env.web-name }} \
+            --set image.repository=${{ secrets.ACR_NAME }} \
+            --set dns.name=${{ secrets.DNS_NAME }} \
+            --set image.tag=${{ env.tag }}
