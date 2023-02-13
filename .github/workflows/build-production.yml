@@ -5,6 +5,13 @@ on:
     tags:
       - 'v*'
 
+env:
+  namespace: production      
+  resource-group: fecohidemosrgcontoso
+  cluster-name: fecohidemosakscontoso
+  web-name: contoso-website
+  tag: ${{ github.sha }}
+
 jobs:
   build_push_image:
     runs-on: ubuntu-20.04
@@ -30,7 +37,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          tags: ${{secrets.ACR_NAME}}/contoso-website:latest,${{secrets.ACR_NAME}}/contoso-website:${{ steps.fetch_version.outputs.TAG }}
+          tags: ${{secrets.ACR_NAME}}/${{ env.web-name }}:${{ env.tag }},${{secrets.ACR_NAME}}/contoso-website:${{ steps.fetch_version.outputs.TAG }}
           push: true
           build-args: |
             "BRANCH=main"
@@ -51,8 +58,8 @@ jobs:
         uses: Azure/aks-set-context@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          resource-group: mslearn-gh-pipelines-19768
-          cluster-name: contoso-video
+          resource-group: ${{ env.resource-group }}
+          cluster-name: ${{ env.cluster-name }}
           
       - name: Run Helm Deploy
         run: |
@@ -61,9 +68,9 @@ jobs:
             --create-namespace \
             --atomic \
             --wait \
-            --namespace production \
-            contoso-website \
-            ./kubernetes/contoso-website \
+            --namespace ${{ env.namespace }} \
+            ${{ env.web-name }} \
+            ./kubernetes/${{ env.web-name }} \
             --set image.repository=${{ secrets.ACR_NAME }} \
             --set dns.name=${{ secrets.DNS_NAME }} \
             --set image.tag=${GITHUB_REF##*/}
