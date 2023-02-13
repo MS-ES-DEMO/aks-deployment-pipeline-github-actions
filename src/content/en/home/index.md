@@ -1,5 +1,5 @@
 ---
-title: "Company Test"
+title: "Company Contoso"
 headless: true
 ---
 
