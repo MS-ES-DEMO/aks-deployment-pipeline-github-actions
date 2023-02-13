@@ -1,13 +1,16 @@
 name: Build and push the latest build to staging
 
 on:
-  push:
-    branches: [ main ]
+  pull_request:
+    types:
+      - closed
+    branches:
+      - staging
 
 env:
   namespace: staging      
-  resource-group: mslearn-gh-pipelines-19768
-  cluster-name: contoso-video
+  resource-group: fecohidemosrgcontoso
+  cluster-name: fecohidemosakscontoso
   web-name: contoso-website
   tag: ${{ github.sha }}
 
@@ -17,6 +20,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Fetch branch name
+        id: branch_name
+        run: echo ::set-output name=BRANCH::${GITHUB_REF#refs/heads/}
 
       - name: Set up Buildx
         uses: docker/setup-buildx-action@v1
@@ -34,6 +41,8 @@ jobs:
           context: .
           tags: ${{secrets.ACR_NAME}}/${{ env.web-name }}:${{ env.tag }}
           push: true
+          build-args: |
+            "BRANCH=${{ steps.branch_name.outputs.BRANCH }}"
 
   deploy:
     runs-on: ubuntu-20.04
