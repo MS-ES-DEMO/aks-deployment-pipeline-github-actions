@@ -9,8 +9,8 @@ on:
 
 env:
   namespace: staging      
-  resource-group: mslearn-gh-pipelines-19768
-  cluster-name: contoso-video
+  resource-group: fecohidemosrgcontoso
+  cluster-name: fecohidemosakscontoso
   web-name: contoso-website
   tag: ${{ github.sha }}
 
