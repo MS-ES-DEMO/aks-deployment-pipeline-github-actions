@@ -86,7 +86,7 @@ azureAppInsightsKey              = "2bae2626-bd84-4341-8ab1-3634e8abbd89"
         languageCode     = "en-us"
         contentDir       = "content/en"
         weight           = 0
-        title            = "Contoso Drones"
+        title            = "Contoso Drones Web"
         [languages.en.params]
             description  = "Contoso has the best drones for all activities"   # Max 160 characters show in search results
             # footerText   = ""                      # Text to override default footer text (markdown allowed)
