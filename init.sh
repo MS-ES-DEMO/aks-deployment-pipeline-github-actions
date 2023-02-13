@@ -1,12 +1,12 @@
 #!/bin/bash
 
 echo "Defining variables..."
-export RESOURCE_GROUP_NAME=mslearn-gh-pipelines-$RANDOM
-export AKS_NAME=contoso-video
-export ACR_NAME=contosocontainerregistry$RANDOM
+export RESOURCE_GROUP_NAME=fecohidemosrgcontoso
+export AKS_NAME=fecohidemosakscontoso
+export ACR_NAME=fecohidemosacrcontoso
 
 echo "Searching for resource group..."
-az group create -n $RESOURCE_GROUP_NAME -l eastus
+az group create -n $RESOURCE_GROUP_NAME -l westeurope
 
 echo "Creating cluster..."
 az aks create \
@@ -17,13 +17,13 @@ az aks create \
   --dns-name-prefix $AKS_NAME \
   --enable-managed-identity \
   --generate-ssh-keys \
-  --node-vm-size Standard_B2s
+  --node-vm-size Standard_D2_v2
 
 echo "Obtaining credentials..."
 az aks get-credentials -n $AKS_NAME -g $RESOURCE_GROUP_NAME
 
 echo "Creating ACR..."
-az acr create -n $ACR_NAME -g $RESOURCE_GROUP_NAME --sku basic
+az acr create -n $ACR_NAME -g $RESOURCE_GROUP_NAME --sku standard
 az acr update -n $ACR_NAME --admin-enabled true
 
 export ACR_USERNAME=$(az acr credential show -n $ACR_NAME --query "username" -o tsv)
@@ -36,13 +36,13 @@ az aks update \
 
 export DNS_NAME=$(az network dns zone list -o json --query "[?contains(resourceGroup,'$RESOURCE_GROUP_NAME')].name" -o tsv)
 
-sed -i '' 's+!IMAGE!+'"$ACR_NAME"'/contoso-website+g' kubernetes/deployment.yaml
-sed -i '' 's+!DNS!+'"$DNS_NAME"'+g' kubernetes/ingress.yaml
+#sed -i '' 's+!IMAGE!+'"$ACR_NAME"'/contoso-website+g' kubernetes/deployment.yaml
+#sed -i '' 's+!DNS!+'"$DNS_NAME"'+g' kubernetes/ingress.yaml
 
 echo "Installation concluded, copy these values and store them, you'll use them later in this exercise:"
 echo "-> Resource Group Name: $RESOURCE_GROUP_NAME"
 echo "-> ACR Name: $ACR_NAME"
 echo "-> ACR Login Username: $ACR_USERNAME"
 echo "-> ACR Password: $ACR_PASSWORD"
-echo "-> AKS Cluster Name: $ACR_NAME"
+echo "-> AKS Cluster Name: $AKS_NAME"
 echo "-> AKS DNS Zone Name: $DNS_NAME"
