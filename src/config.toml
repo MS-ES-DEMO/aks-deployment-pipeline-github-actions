@@ -6,7 +6,7 @@ azureAppInsightsKey              = "2bae2626-bd84-4341-8ab1-3634e8abbd89"
 # googleAnalytics                 = ""                       # https://gohugo.io/templates/internal/#google-analytics
 
 [params]
-    themeStyle                   = "dark"                 # Choose "light" or "dark"
+    themeStyle                   = "light"                 # Choose "light" or "dark"
     favicon                      = "/img/fav.ico"          # Path to favicon file
     showRSSButton                = false                   # Show rss button in navigation
     fadeIn                       = true                    # Turn on/off the fade-in effect
@@ -86,7 +86,7 @@ azureAppInsightsKey              = "2bae2626-bd84-4341-8ab1-3634e8abbd89"
         languageCode     = "en-us"
         contentDir       = "content/en"
         weight           = 0
-        title            = "Contoso Drones"
+        title            = "Contoso Drones Web"
         [languages.en.params]
             description  = "Contoso has the best drones for all activities"   # Max 160 characters show in search results
             # footerText   = ""                      # Text to override default footer text (markdown allowed)
