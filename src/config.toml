@@ -74,6 +74,10 @@ azureAppInsightsKey              = "2bae2626-bd84-4341-8ab1-3634e8abbd89"
     name    = "Contact"
     url     = "#contact"
     weight  = 99
+[[menu.main]]
+    name    = "Projects"
+    url     = "/projects"
+    weight  = 99
 
 # We only use tag as a taxonomies
 # You can add more by yourself
