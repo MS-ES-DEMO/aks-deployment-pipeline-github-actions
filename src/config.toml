@@ -23,8 +23,8 @@ azureAppInsightsKey              = "2bae2626-bd84-4341-8ab1-3634e8abbd89"
         numberOfProjectsToShow   = 3                       # Maximum number of projects to show on home page. Unset or comment out to show all projects
 
         localTime                = true                    # Show your current local time in contact section
-        timeZone                 = "America/Los_Angeles"   # Your timezone as in the TZ* column of this list: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-        timeFormat               = "h:mm A"                # https://momentjs.com/docs/#/displaying/format/
+        timeZone                 = "Europe/Madrid"   # Your timezone as in the TZ* column of this list: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+        timeFormat               = "HH:mm"                # https://momentjs.com/docs/#/displaying/format/
     [params.projects]
         useTwoColumns            = false                   # Use a layout with two columns instead of three
 
@@ -67,16 +67,16 @@ azureAppInsightsKey              = "2bae2626-bd84-4341-8ab1-3634e8abbd89"
     url     = "/"
     weight  = 1
 [[menu.main]]
+    name    = "Projects"
+    url     = "/projects"
+    weight  = 99
+[[menu.main]]
     name    = "About"
     url     = "#about"
     weight  = 98
 [[menu.main]]
     name    = "Contact"
     url     = "#contact"
-    weight  = 99
-[[menu.main]]
-    name    = "Projects"
-    url     = "/projects"
     weight  = 99
 
 # We only use tag as a taxonomies
