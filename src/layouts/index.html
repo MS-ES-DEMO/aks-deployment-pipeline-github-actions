@@ -119,6 +119,33 @@
             </h3>
             {{ end }}
             {{ partial "home/social.html" . }}
+
+            <!-- write a form to get contact information -->
+            <form action="https://formspree.io/{{ .Site.Params.email }}" method="POST">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="Your name">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input class="input" type="email" name="_replyto" placeholder="Your email">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Message</label>
+                    <div class="control">
+                        <textarea class="textarea" name="message" placeholder="Your message"></textarea>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-link">Send</button>
+                    </div>
+                </div>
+            </form>
         </div>
         <!-- End Contact container -->
         {{ partial "top-icon.html" . }}
